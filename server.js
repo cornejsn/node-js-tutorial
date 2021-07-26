@@ -19,8 +19,9 @@ app.get('/',function(req,res){
 
 app.get('/test',(req,res)=>{
     var response=req.query;
-    var word = response.word;
+    var word = Object.values(response).toString(); // Read in paramater as an array then convert to string
     console.log(response);
+    console.log(word);
     res.send(response);
 
     checkPalindrome(word);
