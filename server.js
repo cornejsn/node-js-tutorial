@@ -20,27 +20,36 @@ app.get('/',function(req,res){
 app.get('/test',(req,res)=>{
     var response=req.query;
     var word = Object.values(response).toString(); // Read in paramater as an array then convert to string
-    console.log(response);
-    console.log(word);
-    res.send(response);
+    var palinCheck;
 
-    checkPalindrome(word);
+    //console.log(word);
+
+    if (word) {
+        palinCheck = checkPalindrome(word);
+    }
+
+    // Displays results of checkPalindrome on the browser
+    if (palinCheck) {
+        res.send("The word '" + word + "' is a palindrome.");
+    } else {
+        res.send("The word '" + word + "' is not a palindrome.");
+    }
 });
 
+// checks if input string is a palindrome
 function checkPalindrome(str) {
     // convert string to an array
     const arrayValues = str.split('');
-
     // reverse the array values
     const reverseArrayValues = arrayValues.reverse();
-
-    // convert array to string
+    // convert array back to a string
     const reverseString = reverseArrayValues.join('');
 
+    // return true/false depending if initial string matches reversed string
     if(str == reverseString) {
-        console.log('The word '+ str + ' is a palindrome.');
+        return true;
     }
     else {
-        console.log(str + 'is a palindrome');
+        return false;
     }
 }
