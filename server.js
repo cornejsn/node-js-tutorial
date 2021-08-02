@@ -1,11 +1,12 @@
 const express = require('express');
 const app = express();
 const port = process.env.PORT || 8080;
-const http=require("http");
+const http = require("http");
 
 // This displays message that the server running and listening to specified port
-app.listen(port, () => console.log(`Listening on port ${port}`)); //Line 6
+app.listen(port, () => console.log(`Listening on port ${port}`));
 
+// Default page
 app.get('/',function(req,res){
     res.send('Homepage here');
     var url="http://localhost:8080";
@@ -17,22 +18,15 @@ app.get('/',function(req,res){
     req.end();
 })
 
+// Palindrome check test, requires a key-value pair as an input
 app.get('/test',(req,res)=>{
-    var response=req.query;
+    var response = req.query;
     var word = Object.values(response).toString(); // Read in paramater as an array then convert to string
-    var palinCheck;
-
-    //console.log(word);
-
-    if (word) {
-        palinCheck = checkPalindrome(word);
-    }
 
     // Displays results of checkPalindrome on the browser
-    if (palinCheck) {
-        res.send("The word '" + word + "' is a palindrome.");
-    } else {
-        res.send("The word '" + word + "' is not a palindrome.");
+    if (word) { 
+        var palinCheck = checkPalindrome(word);
+        (palinCheck) ? res.send("The word '" + word + "' is a palindrome.") :  res.send("The word '" + word + "' is not a palindrome.");
     }
 });
 
