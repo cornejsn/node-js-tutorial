@@ -9,24 +9,18 @@ app.listen(port, () => console.log(`Listening on port ${port}`));
 // Default page
 app.get('/',function(req,res){
     res.send('Homepage here');
-    var url="http://localhost:8080";
-    var req = http.request(url,res=>{
-        res.on('data', (chunk) => {
-        console.log(`BODY: ${chunk}`);
-        });
-    });
-    req.end();
 })
 
 // Palindrome check test, requires a key-value pair as an input
-app.get('/test',(req,res)=>{
+app.get('/palindrome',(req,res)=>{
     var response = req.query;
     var word = Object.values(response).toString(); // Read in paramater as an array then convert to string
 
-    // Displays results of checkPalindrome on the browser
+    // Displays results of checkPalindrome on the browser, returns HTTP 400 if no word is entered
     if (word) { 
-        var palinCheck = checkPalindrome(word);
-        (palinCheck) ? res.send("The word '" + word + "' is a palindrome.") :  res.send("The word '" + word + "' is not a palindrome.");
+        (checkPalindrome(word)) ? res.send("The word '" + word + "' is a palindrome.") :  res.send("The word '" + word + "' is not a palindrome.");
+    } else {
+        res.status(400).json({ error: 'No word input.'})
     }
 });
 
@@ -43,7 +37,6 @@ function checkPalindrome(str) {
     if(str == reverseString) {
         return true;
     }
-    else {
-        return false;
-    }
+
+    return false;
 }
