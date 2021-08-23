@@ -1,6 +1,7 @@
 {
   "name": "js-tutorial",
   "version": "1.0.0",
+  "type": "module",
   "description": "",
   "main": "server.js",
   "scripts": {
@@ -22,7 +23,7 @@
     "express": "^4.17.1"
   },
   "devDependencies": {
-    "jest": "^27.0.6"
+    "jest": "^27.0.6",
+    "supertest": "^6.1.6"
   }
-  
 }

@@ -1,7 +1,8 @@
-const express = require('express');
+import express from 'express'
+import http from 'http'
 const app = express();
 const port = process.env.PORT || 8080;
-const http = require("http");
+;
 
 // This displays message that the server running and listening to specified port
 app.listen(port, () => console.log(`Listening on port ${port}`));
@@ -22,6 +23,10 @@ app.get('/palindrome',(req,res)=>{
     } else {
         res.status(400).json({ error: 'No word input.'})
     }
+});
+
+app.post('/users', (req,res)=> {
+  res.sendStatus(200);
 });
 
 // checks if input string is a palindrome
