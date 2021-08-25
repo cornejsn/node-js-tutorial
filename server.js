@@ -1,33 +1,36 @@
-import express from 'express'
-import http from 'http'
-const app = express();
-const port = process.env.PORT || 8080;
-;
+import app from './app.js'
 
-// This displays message that the server running and listening to specified port
-app.listen(port, () => console.log(`Listening on port ${port}`));
+app.listen(8080, () => console.log('listening on port 8080'));
 
-// Default page
-app.get('/',function(req,res){
-    res.send('Homepage here');
-})
+// import express from 'express'
+// import http from 'http'
+// const app = express();
+// const port = process.env.PORT || 8080;
 
-// Palindrome check test, requires a key-value pair as an input
-app.get('/palindrome',(req,res)=>{
-    var response = req.query;
-    var word = Object.values(response).toString(); // Read in paramater as an array then convert to string
+// // This displays message that the server running and listening to specified port
+// app.listen(port, () => console.log(`Listening on port ${port}`));
 
-    // Displays results of checkPalindrome on the browser, returns HTTP 400 if no word is entered
-    if (word) { 
-        (checkPalindrome(word)) ? res.send("The word '" + word + "' is a palindrome.") :  res.send("The word '" + word + "' is not a palindrome.");
-    } else {
-        res.status(400).json({ error: 'No word input.'})
-    }
-});
+// // Default page
+// app.get('/',function(req,res){
+//     res.send('Homepage here');
+// })
 
-app.post('/users', (req,res)=> {
-  res.sendStatus(200);
-});
+// // Palindrome check test, requires a key-value pair as an input
+// app.get('/palindrome',(req,res)=>{
+//     var response = req.query;
+//     var word = Object.values(response).toString(); // Read in paramater as an array then convert to string
+
+//     // Displays results of checkPalindrome on the browser, returns HTTP 400 if no word is entered
+//     if (word) { 
+//         (checkPalindrome(word)) ? res.send("The word '" + word + "' is a palindrome.") :  res.send("The word '" + word + "' is not a palindrome.");
+//     } else {
+//         res.status(400).json({ error: 'No word input.'})
+//     }
+// });
+
+// app.post('/users', (req,res)=> {
+//   res.sendStatus(200);
+// });
 
 // checks if input string is a palindrome
 function checkPalindrome(str) {

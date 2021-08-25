@@ -8,6 +8,14 @@
     "test": "jest",
     "start": "node server.js"
   },
+  "jest": {
+    "setupFilesAfterEnv": [
+      "./app.test.js"
+    ],
+    "transform": {
+      "^.+\\.[t|j]sx?$": "babel-jest"
+    }
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/cornejsn/node-js-tutorial.git"
@@ -20,9 +28,12 @@
   },
   "homepage": "https://github.com/cornejsn/node-js-tutorial#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "regenerator-runtime": "^0.13.9"
   },
   "devDependencies": {
+    "@babel/preset-env": "^7.15.0",
+    "babel-jest": "^27.0.6",
     "jest": "^27.0.6",
     "supertest": "^6.1.6"
   }

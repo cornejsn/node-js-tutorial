@@ -1,6 +1,7 @@
 import supertest from 'supertest'
-import { describe } from 'yargs'
 import app from './app.js'
+
+import 'regenerator-runtime/runtime'
 
 describe("POST /users", () => {
   
