@@ -2,23 +2,29 @@ import express from 'express'
 
 const app = express()
 
-app.post('/users', (req, res) => {
+// First-time user registration
+app.post('/register', (req, res) => {
+  res.sendStatus(200);
+})
+
+// Authentication endpoint
+app.post('/login', (req, res) => {
+  res.sendStatus(200);
+})
+
+// Password reset endpoint
+app.post('/reset', (req, res) => {
   res.sendStatus(200);
 })
 
 export default app;
 
-// import http from 'http'
+/* 
+  SIGN UP SERVICE CONSIDERATIONS
 
-// const hostname = '127.0.0.1';
-// const port = 3000;
-
-// const server = http.createServer((req, res) => {
-//   res.statusCode = 200;
-//   res.setHeader('Content-Type', 'text/plain');
-//   res.end('Hello World');
-// });
-
-// server.listen(port, hostname, () => {
-//   console.log(`Server running at http://${hostname}:${port}/`);
-// });
+  Password must meet Complexity requirements - work on this
+  Username must be unique, can't be too long, Profanity filter (extra credit)
+  Collect an email, associate that email with their username
+  Apply a light-weight database (NeDB)
+  How can we mitigate a hacker who gains access to our database with hashed passkeys?
+*/

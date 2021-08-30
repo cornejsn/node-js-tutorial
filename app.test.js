@@ -2,8 +2,9 @@ import supertest from 'supertest'
 import app from './app.js'
 
 import 'regenerator-runtime/runtime'
+const request = require('supertest');
 
-describe("POST /users", () => {
+describe("POST /register", () => {
   
   describe("given a username and password", () => {
     test("should respond with a 200 status code", async () => {
