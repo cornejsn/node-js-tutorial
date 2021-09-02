@@ -3,8 +3,14 @@ import express from 'express'
 const app = express()
 
 // First-time user registration
+app.use(express.json())
 app.post('/register', (req, res) => {
-  res.sendStatus(200);
+  const {password, username} = req.body;
+  if(!password || !username) {
+    res.sendStatus(400);
+    return;
+  }
+  res.send({userId: 0});
 })
 
 // Authentication endpoint
