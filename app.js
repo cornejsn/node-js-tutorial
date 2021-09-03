@@ -6,11 +6,17 @@ const app = express()
 app.use(express.json())
 app.post('/register', (req, res) => {
   const {password, username} = req.body;
-  if(!password || !username) {
+
+  /* Error handling */
+  if(!password || !username) {  // If either username or password are missing
     res.sendStatus(400);
     return;
   }
-  res.send({userId: 0});
+  if(username.length < 8 || username.length > 16) {  // Username must be 8 to 16 characters long
+    res.sendStatus(400);
+    return;
+  }
+  res.send(req.body);
 })
 
 // Authentication endpoint
