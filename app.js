@@ -1,4 +1,5 @@
 import express from 'express'
+import { CheckPassword } from './services.js'
 
 const app = express()
 
@@ -6,16 +7,10 @@ const app = express()
 app.use(express.json())
 app.post('/register', (req, res) => {
   const {password, username} = req.body;
+  let validPassword = CheckPassword(password);
 
-  /* Error handling */
-  if(!password || !username) {  // If either username or password are missing
-    res.sendStatus(400);
-    return;
-  }
-  if(username.length < 8 || username.length > 16) {  // Username must be 8 to 16 characters long
-    res.sendStatus(400);
-    return;
-  }
+  /* Error handling for password */
+  (validPassword) ? res.sendStatus(200) : res.sendStatus(400);
   res.send(req.body);
 })
 
