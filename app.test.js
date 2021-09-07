@@ -14,6 +14,21 @@ describe("POST /register", () => {
       })
       expect(response.statusCode).toBe(400)
     })
+    test("password is too short", async () => {
+      const response = await request(app).post("/register").send({
+        username: "username",
+        password: "Q!w2Egf"
+      })
+      expect(response.statusCode).toBe(400)
+    })
+    test("password is too short", async () => {
+      const response = await request(app).post("/register").send({
+        username: "username",
+        password: "Q!w2wq!"
+      })
+      expect(response.statusCode).toBe(400)
+    })
+
     test("password is too long", async () => {
       const response = await request(app).post("/register").send({
         username: "username",
@@ -21,6 +36,21 @@ describe("POST /register", () => {
       })
       expect(response.statusCode).toBe(400)
     })
+    test("password is too long", async () => {
+      const response = await request(app).post("/register").send({
+        username: "username",
+        password: "Q!w2qw5!R@@#gasmgapASDG"
+      })
+      expect(response.statusCode).toBe(400)
+    })
+    test("password is too long", async () => {
+      const response = await request(app).post("/register").send({
+        username: "username",
+        password: "Q!w2qw5!RE3d3d1@a"
+      })
+      expect(response.statusCode).toBe(400)
+    })
+
     test("password does not have an uppercase letter", async () => {
       const response = await request(app).post("/register").send({
         username: "username",
@@ -28,6 +58,7 @@ describe("POST /register", () => {
       })
       expect(response.statusCode).toBe(400)
     })
+
     test("password does not have an lowercase letter", async () => {
       const response = await request(app).post("/register").send({
         username: "username",
@@ -35,6 +66,15 @@ describe("POST /register", () => {
       })
       expect(response.statusCode).toBe(400)
     })
+
+    test("password does not have a special character", async () => {
+      const response = await request(app).post("/register").send({
+        username: "username",
+        password: "QW15A851Adjt"
+      })
+      expect(response.statusCode).toBe(400)
+    })
+
     test("password meets all requirements", async () => {
       const response = await request(app).post("/register").send({
         username: "username",
@@ -43,6 +83,7 @@ describe("POST /register", () => {
       expect(response.statusCode).toBe(200)
     })
   })
+  
   describe("when the username, password, or both are missing", () => {
     test("should respond with a 400 status code", async () => {
       const bodyData = [

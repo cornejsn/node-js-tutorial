@@ -8,7 +8,18 @@
 
 */
 export function CheckPassword (password) {
-    console.log("Checking: " + password)
-    var regExpCheckPassword = /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,16})/;
+    // console.log("Checking: " + password)
+    var regExpCheckPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*]).{8,16}$/;
+    return (regExpCheckPassword.test(password))
+}
+/*  This function verifies username complexity.
+    The variable 'regExpCheckPassword' describes the requirements needed for the password to be sufficiently complex:
+        - Length is between 6 and 12 characters
+        - Does not contain numbers/special characters
+
+*/
+export function CheckUsername (username) {
+    // console.log("Checking: " + password)
+    var regExpCheckUsername = /^(?=.*[a-z])(?=.*[A-Z])(?!.*[0-9])(?=.*[!@#\$%\^&\*]).{6,12}$/;
     return (regExpCheckPassword.test(password))
 }
