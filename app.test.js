@@ -83,6 +83,44 @@ describe("POST /register", () => {
       expect(response.statusCode).toBe(200)
     })
   })
+
+  describe("testing username complexity checker: ", () => {
+    test("username is too short", async () => {
+      const response = await request(app).post("/register").send({
+        username: "User",
+        password: "Q!w2e#a85TS"
+      })
+      expect(response.statusCode).toBe(400)
+    })
+    test("username is too long", async () => {
+      const response = await request(app).post("/register").send({
+        username: "UsernameThatIsTooLong",
+        password: "Q!w2e#a85TS"
+      })
+      expect(response.statusCode).toBe(400)
+    })
+    test("username contains a number", async () => {
+      const response = await request(app).post("/register").send({
+        username: "Username1",
+        password: "Q!w2e#a85TS"
+      })
+      expect(response.statusCode).toBe(400)
+    })
+    test("username contains a special character", async () => {
+      const response = await request(app).post("/register").send({
+        username: "Username!",
+        password: "Q!w2e#a85TS"
+      })
+      expect(response.statusCode).toBe(400)
+    })
+    test("username meets all requirements", async () => {
+      const response = await request(app).post("/register").send({
+        username: "Username",
+        password: "Q!w2e#a85TS"
+      })
+      expect(response.statusCode).toBe(200)
+    })
+  })  
   
   describe("when the username, password, or both are missing", () => {
     test("should respond with a 400 status code", async () => {

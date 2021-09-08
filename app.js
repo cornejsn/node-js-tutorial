@@ -1,5 +1,6 @@
 import express from 'express'
 import { CheckPassword } from './services.js'
+import { CheckUsername } from './services.js'
 
 const app = express()
 
@@ -8,9 +9,9 @@ app.use(express.json())
 app.post('/register', (req, res) => {
   const {password, username} = req.body;
   let validPassword = CheckPassword(password);
-
+  let validUsername = CheckUsername(username);
   /* Error handling for password */
-  (validPassword) ? res.sendStatus(200) : res.sendStatus(400);
+  (validPassword && validUsername) ? res.sendStatus(200) : res.sendStatus(400);
   res.send(req.body);
 })
 
