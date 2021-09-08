@@ -1,17 +1,21 @@
 import express from 'express'
 import { CheckPassword } from './services.js'
 import { CheckUsername } from './services.js'
+import { CheckEmail } from './services.js'
 
 const app = express()
 
 // First-time user registration
 app.use(express.json())
 app.post('/register', (req, res) => {
-  const {password, username} = req.body;
+  const {password, username, email} = req.body;
+  console.log(req.body);
   let validPassword = CheckPassword(password);
   let validUsername = CheckUsername(username);
-  /* Error handling for password */
-  (validPassword && validUsername) ? res.sendStatus(200) : res.sendStatus(400);
+  let validEmail = CheckUsername(email);
+
+  /* Error handling for user information*/
+  (validPassword && validUsername && validEmail) ? res.sendStatus(200) : res.sendStatus(400);
   res.send(req.body);
 })
 

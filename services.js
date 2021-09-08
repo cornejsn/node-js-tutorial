@@ -7,7 +7,7 @@
         - Has at least one of these special characters: ! @ # $ % ^ & *
 
 */
-export function CheckPassword (password) {
+export function CheckPassword(password) {
     var regExpCheckPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*]).{8,16}$/;
     return (regExpCheckPassword.test(password))
 }
@@ -18,7 +18,26 @@ export function CheckPassword (password) {
         - Does not contain numbers/special characters
 
 */
-export function CheckUsername (username) {
+export function CheckUsername(username) {
     var regExpCheckUsername = /^[a-zA-Z]{6,12}$/;
     return (regExpCheckUsername.test(username))
+}
+
+/*  This function verifies email complexity.
+    The variable 'regExpCheckEmail' describes the requirements needed for the email to be sufficiently complex:
+        - Name with at least 4 characters
+        - Name without special characters ^ < > ( ) \[ \] \\\ / . , ; : \s @ ’
+        - E-mail must have @
+        - Domain name with at least 4 characters
+        - Domain name without special characters ^ < > ( ) \[ \] \\\ / . , ; : \s @ ’
+        - Domain extension only .com or .net
+*/
+export function CheckEmail(email) {
+    var regExpCheckEmail = /([A-Z]|[a-z]|[^<>()\[\]\\\/.,;:\s@"]){4,}\@([A-Z]|[a-z]|[^<>()\[\]\\\/.,;:\s@"!#\$%\^&\*]){4,}\.(com|net)/;
+    return (regExpCheckEmail.test(email))
+}
+
+/*  This function adds a new user to the database, given that the user does not already exist.*/
+export function RegisterNewUser(username, password, email) {
+
 }
