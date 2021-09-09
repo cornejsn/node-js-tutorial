@@ -6,13 +6,13 @@ import { CheckEmail } from './services.js'
 const app = express()
 
 // First-time user registration
-app.use(express.json())
+app.use(express.json());
 app.post('/register', (req, res) => {
   const {password, username, email} = req.body;
   console.log(req.body);
   let validPassword = CheckPassword(password);
   let validUsername = CheckUsername(username);
-  let validEmail = CheckUsername(email);
+  let validEmail = CheckEmail(email);
 
   /* Error handling for user information*/
   (validPassword && validUsername && validEmail) ? res.sendStatus(200) : res.sendStatus(400);
