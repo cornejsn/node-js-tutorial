@@ -17,11 +17,6 @@ await db.read()
 // Set default data
 db.data = { users: [] }
 // db.data = db.data || { posts: [] } // for node < v15.x
-
-// Create a user using plain JS
-db.data.users.push({ username: 'john', password: 'password1', email: 'john@school.edu' })
-
-// Write db.data content to db.json
-await db.write()
+export default db;
 
 app.listen(8080, () => console.log('listening on port 8080'));

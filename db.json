@@ -1,9 +1,14 @@
 {
   "users": [
     {
-      "username": "john",
-      "password": "password1",
-      "email": "john@school.edu"
+      "username": "Username",
+      "password": "Q!w2e#a85TS",
+      "email": "validEmail@gmail.com"
+    },
+    {
+      "username": "Username",
+      "password": "Q!w2e#a85TS",
+      "email": "validEmail@gmail.com"
     }
   ]
 }

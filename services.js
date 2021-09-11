@@ -1,3 +1,5 @@
+import db from './server.js'
+
 /*  This function verifies password complexity.
     The variable 'regExpCheckPassword' describes the requirements needed for the password to be sufficiently complex:
         - Length is between 8 and 16 digits
@@ -38,6 +40,11 @@ export function CheckEmail(email) {
 }
 
 /*  This function adds a new user to the database, given that the user does not already exist.*/
-export function RegisterNewUser(username, password, email) {
+//  FIXME: Don't store password in plaintext, will need to be hashed! 
+export function RegisterUser(user, pass, email) {
+    // Create a user using plain JS
+    db.data.users.push({ username: user, password: pass, email: email })
 
+    // Write db.data content to db.json
+    db.write()
 }

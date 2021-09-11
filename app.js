@@ -2,6 +2,7 @@ import express from 'express'
 import { CheckPassword } from './services.js'
 import { CheckUsername } from './services.js'
 import { CheckEmail } from './services.js'
+import { RegisterUser } from './services.js'
 
 const app = express()
 
@@ -15,8 +16,14 @@ app.post('/register', (req, res) => {
   let validEmail = CheckEmail(email);
 
   /* Error handling for user information*/
-  (validPassword && validUsername && validEmail) ? res.sendStatus(200) : res.sendStatus(400);
-  res.send(req.body);
+  if (!(validPassword && validUsername && validEmail)) {
+    res.sendStatus(400);
+    // res.send(req.body);
+  }
+
+  RegisterUser(req.body.username, req.body.password, req.body.email);
+  res.sendStatus(200);
+  // res.send(req.body);
 })
 
 // Authentication endpoint
