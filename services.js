@@ -42,7 +42,7 @@ export function CheckEmail(email) {
 }
 
 /*  This function adds a new user to the database, given that the user does not already exist.*/
-//  FIXME: Don't store password in plaintext, will need to be hashed! 
+//  FIXME: Don't store password in plaintext, will need to be hashed! (look up salting)
 export function RegisterUser(user, pass, email) {
     for (let i=0; i < db.data.users.length; i++) {
         if (db.data.users[i].username == user) {

@@ -196,7 +196,7 @@ describe("POST /register", () => {
     })   
   })
 
-  // FIXME
+  // FIXME: implement duplicate user testing & login endpoint testing
   // describe("attempting to add a user to the DB that already exists", () => {
   //   test("duplicate user", async () => {
   //     const response = await request(app).post("/register").send({

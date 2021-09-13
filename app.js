@@ -25,6 +25,7 @@ app.post('/register', (req, res) => {
 })
 
 // Authentication endpoint
+// FIXME: takes in username and password, authenticates password using email in db (return 401 on failure)
 app.post('/login', (req, res) => {
   res.sendStatus(200);
 })
