@@ -195,6 +195,16 @@ describe("POST /register", () => {
       }
     })   
   })
+
+  // FIXME
   // describe("attempting to add a user to the DB that already exists", () => {
+  //   test("duplicate user", async () => {
+  //     const response = await request(app).post("/register").send({
+  //       username: "Username",
+  //       password: "Q!w",
+  //       email: "validEmail@outlook.com" 
+  //     })
+  //     expect(response.statusCode).toBe(400)
+  //   })
   // })
 })

@@ -1,4 +1,6 @@
 import db from './server.js'
+import crypto from 'crypto'
+const sha256 = x => crypto.createHash('sha256').update(x, 'utf8').digest('hex');
 
 /*  This function verifies password complexity.
     The variable 'regExpCheckPassword' describes the requirements needed for the password to be sufficiently complex:
@@ -48,7 +50,11 @@ export function RegisterUser(user, pass, email) {
         }    
     }
     // Write db.data content to db.json
-    db.data.users.push({ username: user, password: pass, email: email })
+    db.data.users.push({ username: user, password: HashPassword(pass), email: email })
     db.write();
     return true;
+}
+
+function HashPassword(pass, email) {
+    return sha256(email + pass);
 }

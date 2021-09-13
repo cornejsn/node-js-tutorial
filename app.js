@@ -1,3 +1,4 @@
+import e from 'express'
 import express from 'express'
 import { CheckPassword } from './services.js'
 import { CheckUsername } from './services.js'
@@ -16,11 +17,11 @@ app.post('/register', (req, res) => {
   let validEmail = CheckEmail(email);
 
   /* Error handling for user information*/
-  if (validPassword && validUsername && validEmail) {
-    RegisterUser(req.body.username, req.body.password, req.body.email) ? res.sendStatus(200) : res.status(500).send('Error: User already exists.') ;
-    // res.send(req.body);
+  if (!(validPassword && validUsername && validEmail)) {
+    res.status(400).send('error: inputs do not meet complexity requirements')
+  } else {
+    RegisterUser(req.body.username, req.body.password, req.body.email) ? res.status(200).send() : res.status(400).send('error: user already exists')
   }
-  res.sendStatus(400);
 })
 
 // Authentication endpoint
