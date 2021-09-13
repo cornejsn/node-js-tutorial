@@ -16,14 +16,11 @@ app.post('/register', (req, res) => {
   let validEmail = CheckEmail(email);
 
   /* Error handling for user information*/
-  if (!(validPassword && validUsername && validEmail)) {
-    res.sendStatus(400);
+  if (validPassword && validUsername && validEmail) {
+    RegisterUser(req.body.username, req.body.password, req.body.email) ? res.sendStatus(200) : res.status(500).send('Error: User already exists.') ;
     // res.send(req.body);
   }
-
-  RegisterUser(req.body.username, req.body.password, req.body.email);
-  res.sendStatus(200);
-  // res.send(req.body);
+  res.sendStatus(400);
 })
 
 // Authentication endpoint
