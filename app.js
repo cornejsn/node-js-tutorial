@@ -4,6 +4,7 @@ import { CheckPassword } from './services.js'
 import { CheckUsername } from './services.js'
 import { CheckEmail } from './services.js'
 import { RegisterUser } from './services.js'
+import { VerifyLogin } from './services.js'
 
 const app = express()
 
@@ -27,7 +28,7 @@ app.post('/register', (req, res) => {
 // Authentication endpoint
 // FIXME: takes in username and password, authenticates password using email in db (return 401 on failure)
 app.post('/login', (req, res) => {
-  res.sendStatus(200);
+  VerifyLogin(req.body.username, req.body.password, req.body.email) ? res.status(200).send() : res.status(400).send('error: login failed')
 })
 
 // Password reset endpoint
