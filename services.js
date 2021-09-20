@@ -49,7 +49,7 @@ export function RegisterUser(user, pass, email) {
         }    
     }
     // Write db.data content to db.json
-    db.data.users.push({ username: user, password: HashPassword(pass), email: email })
+    db.data.users.push({ username: user, password: HashPassword(pass, email), email: email })
     db.write();
     return true;
 }
@@ -58,7 +58,8 @@ export function RegisterUser(user, pass, email) {
 export function VerifyLogin(user, pass, email) {
     for (let i=0; i < db.data.users.length; i++) {
         if ((db.data.users[i].username == user) && (db.data.users[i].email == email)) {
-            if (db.data.users[i].password == HashPassword(email + pass)) {
+            console.log('user found!')
+            if (db.data.users[i].password == HashPassword(pass, email)) {
                 return true;
             }
         } 
@@ -67,5 +68,5 @@ export function VerifyLogin(user, pass, email) {
 }
 
 function HashPassword(pass, email) {
-    return sha256(email + pass);
+    return sha256(pass + email);
 }
