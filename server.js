@@ -5,6 +5,8 @@ import { fileURLToPath } from 'url'
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
+app.set('view engine', 'ejs');
+
 // Use JSON file for storage
 const file = join(__dirname, 'db.json')
 const adapter = new JSONFile(file)

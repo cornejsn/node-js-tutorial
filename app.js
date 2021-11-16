@@ -6,10 +6,19 @@ import { CheckEmail } from './services.js'
 import { RegisterUser } from './services.js'
 import { VerifyLogin } from './services.js'
 
-const app = express()
+const app = express();
+
+// Testing EJS
+app.get('/', (req, res) => {
+  res.render('home')
+})
 
 // First-time user registration
 app.use(express.json());
+app.post('/input', (req, res) => {
+  res.redirect('/register')
+})
+
 app.post('/register', (req, res) => {
   const {password, username, email} = req.body;
   console.log(req.body);
@@ -26,7 +35,6 @@ app.post('/register', (req, res) => {
 })
 
 // Authentication endpoint
-// FIXME: takes in username and password, authenticates password using email in db (return 401 on failure)
 app.post('/login', (req, res) => {
   VerifyLogin(req.body.username, req.body.password, req.body.email) ? res.status(200).send() : res.status(400).send('error: login failed')
 })
