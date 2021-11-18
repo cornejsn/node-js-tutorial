@@ -1,5 +1,7 @@
 import e from 'express'
 import express from 'express'
+import multer from 'multer'
+import alert from 'alert'
 import { CheckPassword } from './services.js'
 import { CheckUsername } from './services.js'
 import { CheckEmail } from './services.js'
@@ -7,21 +9,26 @@ import { RegisterUser } from './services.js'
 import { VerifyLogin } from './services.js'
 
 const app = express();
+var upload = multer();
 
-// Testing EJS
-app.get('/', (req, res) => {
-  res.render('home')
-})
+// for parsing application/json
+app.use(express.json()); 
+
+// for parsing application/xwww-form-urlencoded
+app.use(express.urlencoded({ extended: true })); 
+
+// for parsing multipart/form-data
+app.use(upload.array()); 
+app.use(express.static('public'));
 
 // First-time user registration
-app.use(express.json());
-app.post('/input', (req, res) => {
-  res.redirect('/register')
+app.get('/register', (req, res) => {
+  res.render('home')
 })
 
 app.post('/register', (req, res) => {
   const {password, username, email} = req.body;
-  console.log(req.body);
+  //console.log(req.body);
   let validPassword = CheckPassword(password);
   let validUsername = CheckUsername(username);
   let validEmail = CheckEmail(email);
@@ -29,8 +36,14 @@ app.post('/register', (req, res) => {
   /* Error handling for user information*/
   if (!(validPassword && validUsername && validEmail)) {
     res.status(400).send('error: inputs do not meet complexity requirements')
-  } else {
-    RegisterUser(req.body.username, req.body.password, req.body.email) ? res.status(200).send() : res.status(400).send('error: user already exists')
+  } else {    
+    if (RegisterUser(req.body.username, req.body.password, req.body.email)) {
+      res.status(200).send('User successfully registered!')
+      alert('User successfully registered!')
+    } else {
+      res.status(400).send('error: user already exists')
+      alert('error: user already exists')
+    }
   }
 })
 
